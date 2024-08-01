@@ -1,0 +1,19 @@
+name: setTrack
+
+on: [push]
+
+env:
+  PATCH: 2
+
+jobs:
+  - name: Set Track
+    id: set_track
+    run: |
+      if [ ${{ env.patch }} -gt 0 ]; then
+        echo “::set-output name=track::Mobile-RC-hotfix”
+      else
+        echo “::set-output name=track::Mobile-RC”
+      fi
+  - name: Print Track
+    run: |
+      echo "track: ${{ set_track.outputs.track }}"
