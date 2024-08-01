@@ -1,0 +1,29 @@
+name: Artifact
+
+on: [push]
+
+env:
+  ARTIFACT_NAME: myartifact3
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Check out the code 
+        uses: actions/checkout@v2
+        
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: ${{ env.ARTIFACT_NAME }}
+          path: .
+
+      - name: List and delete old artifacts
+        uses: ./.github/workflows/rermove_artifacts
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
