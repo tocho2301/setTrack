@@ -16,9 +16,9 @@ jobs:
         id: set_track
         run: |
           if [ ${{ env.PATCH }} -gt 0 ]; then
-            echo “::set-output name=track::Mobile-RC-hotfix”
+            echo "track=Mobile-RC-hotfix" >> $GITHUB_OUTPUT
           else
-            echo “::set-output name=track::Mobile-RC”
+           echo "track=Mobile-RC" >> $GITHUB_OUTPUT
           fi
       - name: Print Track
         run: |
