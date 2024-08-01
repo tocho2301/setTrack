@@ -3,11 +3,7 @@ name: Artifact
 on: [push]
 
 env:
-  ARTIFACT_NAME: myartifact3
-
-permissions:
-  contents: read
-  actions: write
+  PATCH: 1
 
 jobs:
   main:
@@ -19,7 +15,7 @@ jobs:
       - name: Set Track
         id: set_track
         run: |
-          if [ ${{ env.patch }} -gt:: 0 ]; then
+          if [ ${{ env.patch }} -gt 0 ]; then
             echo “::set-output name=track::Mobile-RC-hotfix”
           else
             echo “::set-output name=track::Mobile-RC”
