@@ -16,14 +16,14 @@ jobs:
       - name: Check out the code 
         uses: actions/checkout@v2
         
-      - name: Upload the artifact
-        uses: actions/upload-artifact@v2
-        with: 
-          name: ${{ env.ARTIFACT_NAME }}
-          path: .
-
-      - name: List and delete old artifacts
-        uses: ./.github/workflows/rermove_artifacts
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
+      - name: Set Track
+        id: set_track
+        run: |
+          if [ ${{ env.patch }} -gt 0 ]; then
+            echo “::set-output name=track::Mobile-RC-hotfix”
+          else
+            echo “::set-output name=track::Mobile-RC”
+          fi
+      - name: Print Track
+        run: |
+          echo "track: ${{ set_track.outputs.track }}"
