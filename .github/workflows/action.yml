@@ -26,4 +26,4 @@ jobs:
           fi
       - name: Print Track
         run: |
-          echo "track: ${{ set_track.outputs.track }}"
+          echo "track: ${{ steps.set_track.outputs.track }}"
