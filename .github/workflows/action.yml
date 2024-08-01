@@ -15,7 +15,7 @@ jobs:
       - name: Set Track
         id: set_track
         run: |
-          if [ ${{ PATCH }} -gt 0 ]; then
+          if [ ${{ env.PATCH }} -gt 0 ]; then
             echo “::set-output name=track::Mobile-RC-hotfix”
           else
             echo “::set-output name=track::Mobile-RC”
